@@ -1,0 +1,1 @@
+<a href="{{ route('students.index') }}">dsfdsd</a>
