@@ -7,7 +7,7 @@
     <h1 class="m-5 text-center">Show this Student</h1>
     <div class="col  d-flex justify-content-center">
 
-        <div class="card bg-dark text-light" style="width: 38rem;">
+        <div class="card bg-dark text-light" style="width: 1020px;">
        
          
           <table class="table table-dark table-hover text-center">
@@ -17,6 +17,7 @@
               <th>Name</th>
               <th>Address</th>
               <th>Phone</th>
+              <th>Photo</th>
 
             </tr>
             <tr>
@@ -24,6 +25,10 @@
               <td >{{ $student->name }}</td>
               <td >{{ $student->address }}</td>
               <td >{{ $student->phone }}</td>
+              <td >
+                <img class="mx-auto d-block" src="/photo/{{  $student->photo  }}" style="width: 150px" alt="" >
+              </td>
+              
             </tr>
             </table>
             <div class="text-center">

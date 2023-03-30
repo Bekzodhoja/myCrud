@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+
 use Illuminate\Http\Request;
+use Validator;
+
+
 
 class StudentsController extends Controller
 {
@@ -30,12 +34,33 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
      
-        $student= new Student;
-        $student->name = $request->name;
-        $student->address= $request->address;
-        $student->phone= $request->phone;
-        $student->save();
-       return redirect()->back();
+        
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'phone'=>'required',
+            'photo' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+        ]);
+
+
+        $student = $request->all();
+  
+        if ($photo = $request->file('photo')) {
+            $destinationPath = 'photo/';
+            $profilephoto = date('YmdHis') . "." . $photo->getClientOriginalExtension();
+            $photo->move($destinationPath, $profilephoto);
+            $student['photo'] = "$profilephoto";
+        }
+    
+        Student::create($student);
+     
+        return redirect()->route('students.index');
+
+    //     $photoName = time().'.'.$request->photo->extension();
+
+    //     $request->photo->move(public_path('photos'), $photoName);
+    //     $student->save();
+    //    return redirect()->back()->with('photo',$photoName);
     }
 
     /**
@@ -66,11 +91,18 @@ class StudentsController extends Controller
             'address'=>'required',
             'phone'=>'required',
         ]);
-      Student::find($student->id)->update([
-        'name'=>request('name'),
-        'address'=>request('address'),
-        'phone'=>request('phone'),
-      ]);
+        $input = $request->all();
+  
+        if ($photo = $request->file('photo')) {
+            $destinationPath = 'photo/';
+            $profilephoto = date('YmdHis') . "." . $photo->getClientOriginalExtension();
+            $photo->move($destinationPath, $profilephoto);
+            $input['photo'] = "$profilephoto";
+        }else{
+            unset($input['image']);
+        }
+          
+        $student->update($input);
        return redirect()->route('students.index' ,compact('student'));
     }
 

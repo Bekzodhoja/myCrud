@@ -11,6 +11,7 @@
             <th>Name</th>
             <th>Address</th>
             <th>Phone</th>
+            <th>Photo</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -21,6 +22,7 @@
             <td>{{ $student->name }}</td>
             <td>{{ $student->address }}</td>
             <td>{{ $student->phone }}</td>
+            <td><img src="/photo/{{  $student->photo }}" style="width: 80px" alt=""></td>
             <td>
                 <a class="btn btn-light m-2" href="{{ route('students.edit',$student->id) }}">Edit</a>
              
