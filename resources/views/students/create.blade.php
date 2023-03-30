@@ -1,3 +1,5 @@
+<x-app-layout>
+</x-app-layout>
 @include('layouts')
 <div class="container">
     <div>

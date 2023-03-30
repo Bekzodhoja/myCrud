@@ -1,9 +1,11 @@
+    <x-app-layout>
+    </x-app-layout>
     @include('layouts')
-    
+
 <div class="container">
     <h1 class="m-5 text-center">All Students</h1>
     <a href="{{ route('students.create') }}" class="btn btn-primary mb-2">Creat New Student</a>
-    <table class="table table-dark table-hover">
+    <table class="table table-dark table-hover text-center">
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -27,7 +29,7 @@
                 <form action="{{ route('students.destroy',$student->id) }}" method="POST">
                     @csrf
                     @method('delete')
-                    <button class="btn btn-danger" onclick="return confirm('Are you sure ?')">
+                    <button class="btn btn-danger m-2" onclick="return confirm('Are you sure ?')">
                      Delete
                     </button>
                 </form>
